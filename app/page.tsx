@@ -85,7 +85,7 @@ export default function LandingPage() {
           </motion.span>
           
           <h1 className="text-6xl md:text-8xl font-bold tracking-tighter mb-6 bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent">
-            Trevor.
+            Trevar.
           </h1>
           
           <p className="text-xl text-slate-400 mb-10 leading-relaxed max-w-lg">
