@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { supabase } from "../lib/supabase";
 import { Heart, MessageCircle, Send, User, MapPin } from "lucide-react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 
 const DEMO_VIDEOS = [
-  { id: 1, title: "Street Food", location: "Osaka", color: "bg-orange-600" },
-  { id: 2, title: "Hidden Gem", location: "Bali", color: "bg-emerald-600" },
-  { id: 3, title: "Viewpoint", location: "Tokyo", color: "bg-indigo-600" },
-  { id: 4, title: "Cafe Spot", location: "Paris", color: "bg-rose-600" },
+  { id: 1, title: "Street Food", location: "Osaka", image: "https://images.unsplash.com/photo-1526312426976-f4d754fa9bd6?auto=format&fit=crop&w=900&q=80" },
+  { id: 2, title: "Hidden Gem", location: "Bali", image: "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=900&q=80" },
+  { id: 3, title: "Viewpoint", location: "Tokyo", image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" },
+  { id: 4, title: "Cafe Spot", location: "Paris", image: "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=900&q=80" },
 ];
 
 export default function LandingPage() {
@@ -40,26 +40,25 @@ export default function LandingPage() {
     }
   };
 
-  // Variants for the video slide transition
-  const slideVariants: Variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? "100%" : "-100%",
-      opacity: 0,
-      scale: 0.95,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.4, ease: "easeOut" },
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? "100%" : "-100%",
-      opacity: 0,
-      scale: 0.95,
-      transition: { duration: 0.4, ease: "easeIn" },
-    }),
-  };
+  const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? "100%" : "-100%",
+    opacity: 0,
+    scale: 0.95,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
+  exit: (direction: number) => ({
+    x: direction < 0 ? "100%" : "-100%",
+    opacity: 0,
+    scale: 0.95,
+    transition: { duration: 0.4, ease: "easeIn" },
+  }),
+} satisfies Variants;
 
   return (
     <main className="min-h-screen bg-slate-950 text-white flex flex-col items-center justify-center p-4 md:p-8 overflow-hidden relative">
@@ -134,10 +133,8 @@ export default function LandingPage() {
 
           {/* Phone Frame */}
           <div className="relative w-[300px] h-[600px] bg-slate-900 rounded-[3.5rem] p-3 border-[8px] border-slate-800 shadow-2xl overflow-hidden ring-1 ring-white/10">
-            {/* Phone Glow Overlay */}
             <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none z-50" />
             
-            {/* Navigational Touch Targets (Hidden but functional for demo feel) */}
             <div className="absolute inset-0 z-40 flex">
               <div onClick={() => paginate(-1)} className="flex-1 h-full cursor-pointer group flex items-center justify-start p-4">
                  <div className="opacity-0 group-hover:opacity-30 transition-opacity bg-white/20 w-8 h-8 rounded-full flex items-center justify-center">←</div>
@@ -147,7 +144,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Video Cards Feed */}
             <div className="relative w-full h-full rounded-[2.8rem] overflow-hidden bg-black">
               <AnimatePresence initial={false} custom={direction}>
                 <motion.div
@@ -157,7 +153,12 @@ export default function LandingPage() {
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className={`absolute inset-0 ${DEMO_VIDEOS[index].color} flex flex-col justify-end p-6`}
+                  style={{
+                    backgroundImage: `url(${DEMO_VIDEOS[index].image})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                  className="absolute inset-0 flex flex-col justify-end p-6"
                 >
                   <div className="z-20 mb-10">
                     <h3 className="text-2xl font-bold text-white drop-shadow-lg">{DEMO_VIDEOS[index].title}</h3>
@@ -166,12 +167,12 @@ export default function LandingPage() {
                       <span>{DEMO_VIDEOS[index].location}</span>
                     </div>
                   </div>
-                  {/* Visual Mesh/Gradient for depth */}
+                  {/* Overlay for readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
                 </motion.div>
               </AnimatePresence>
 
-              {/* TikTok Sidebar UI */}
+              {/* Sidebar UI */}
               <div className="absolute right-3 bottom-24 z-50 flex flex-col items-center gap-6">
                 <div className="flex flex-col items-center gap-1">
                   <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-md border border-white/20">
@@ -194,7 +195,6 @@ export default function LandingPage() {
             </div>
           </div>
           
-          {/* Subtle Phone Glow Pulse */}
           <motion.div 
             animate={{ opacity: [0.1, 0.3, 0.1], scale: [1, 1.1, 1] }}
             transition={{ duration: 4, repeat: Infinity }}
