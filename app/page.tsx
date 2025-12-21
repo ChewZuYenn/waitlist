@@ -62,17 +62,22 @@ export default function LandingPage() {
 
   return (
     <main className="min-h-screen text-white flex flex-col items-center justify-center p-4 md:p-8 overflow-hidden relative">
-      {/* Background Images - Horizontal Split */}
+      {/* Background Images - Horizontal Split (3 sections) */}
       <div className="absolute inset-0 flex">
-        {/* Left Half - Beach Image */}
+        {/* Left Third - Beach Image */}
         <div 
-          className="w-1/2 bg-cover bg-center bg-no-repeat"
+          className="w-1/3 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1476673160081-cf065607f449?auto=format&fit=crop&w=1920&q=80')" }}
         />
-        {/* Right Half - Couple Vacation Image */}
+        {/* Middle Third - Couple Vacation Image */}
         <div 
-          className="w-1/2 bg-cover bg-center bg-no-repeat"
+          className="w-1/3 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1920&q=80')" }}
+        />
+        {/* Right Third - Street Food/Tourists Image */}
+        <div 
+          className="w-1/3 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1920&q=80')" }}
         />
       </div>
       {/* Dark Overlay for readability */}
