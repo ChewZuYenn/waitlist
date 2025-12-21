@@ -61,10 +61,22 @@ export default function LandingPage() {
 } satisfies Variants;
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white flex flex-col items-center justify-center p-4 md:p-8 overflow-hidden relative">
-      {/* Background Glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]" />
+    <main className="min-h-screen text-white flex flex-col items-center justify-center p-4 md:p-8 overflow-hidden relative">
+      {/* Background Images - Horizontal Split */}
+      <div className="absolute inset-0 flex">
+        {/* Left Half - Beach Image */}
+        <div 
+          className="w-1/2 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1476673160081-cf065607f449?auto=format&fit=crop&w=1920&q=80')" }}
+        />
+        {/* Right Half - Couple Vacation Image */}
+        <div 
+          className="w-1/2 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1920&q=80')" }}
+        />
+      </div>
+      {/* Dark Overlay for readability */}
+      <div className="absolute inset-0 bg-black/50" />
 
       <div className="container max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center z-10">
         
